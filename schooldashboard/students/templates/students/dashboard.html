@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-blue-50 via-white to-blue-100 min-h-screen text-gray-800">
+
+    <div class="container mx-auto px-6 py-8">
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-4xl font-bold text-blue-700">🎓 Student Dashboard</h1>
+            <a href="{% url 'add' %}" 
+               class="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-5 py-2 rounded-xl shadow-md transition-all duration-300">
+               ➕ Add Student
+            </a>
+        </div>
+
+        <!-- Search & Sort Section -->
+        <form method="get" class="bg-white p-5 rounded-2xl shadow-sm flex flex-col md:flex-row gap-4 md:items-center mb-6 border border-gray-200">
+            <input 
+                type="text" 
+                name="q" 
+                placeholder="🔍 Search by name..." 
+                class="flex-grow px-4 py-2 rounded-lg border border-gray-300 bg-gray-50 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+            >
+            
+            <select 
+                name="sort" 
+                onchange="this.form.submit()" 
+                class="px-4 py-2 rounded-lg border border-gray-300 bg-gray-50 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+            >
+                <option value="">Sort By</option>
+                <option value="name">Name</option>
+                <option value="marks">Marks</option>
+            </select>
+            
+            <button 
+                type="submit" 
+                class="bg-blue-500 hover:bg-blue-600 px-5 py-2 rounded-lg text-white font-semibold shadow-md transition-all duration-300">
+                Search
+            </button>
+        </form>
+
+        <!-- Student Table -->
+        <div class="overflow-x-auto bg-white rounded-2xl shadow-md border border-gray-200">
+            <table class="min-w-full text-sm text-gray-700">
+                <thead class="bg-blue-100 text-blue-800 uppercase text-xs font-semibold">
+                    <tr>
+                        <th class="py-3 px-4 text-left">Name</th>
+                        <th class="py-3 px-4 text-left">RegNo</th>
+                        <th class="py-3 px-4 text-left">Class</th>
+                        <th class="py-3 px-4 text-left">Branch</th>
+                        <th class="py-3 px-4 text-left">Year</th>
+                        <th class="py-3 px-4 text-left">Subject</th>
+                        <th class="py-3 px-4 text-left">Marks</th>
+                        <th class="py-3 px-4 text-left">Grade</th>
+                        <th class="py-3 px-4 text-left">College</th>
+                        <th class="py-3 px-4 text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for s in students %}
+                    <tr class="border-b border-gray-200 hover:bg-blue-50 transition-all">
+                        <td class="py-3 px-4">{{ s.name }}</td>
+                        <td class="py-3 px-4">{{ s.regno }}</td>
+                        <td class="py-3 px-4">{{ s.student_class }}</td>
+                        <td class="py-3 px-4">{{ s.branch }}</td>
+                        <td class="py-3 px-4">{{ s.year }}</td>
+                        <td class="py-3 px-4">{{ s.sub }}</td>
+                        <td class="py-3 px-4">{{ s.marks }}</td>
+                        <td class="py-3 px-4">{{ s.grade }}</td>
+                        <td class="py-3 px-4">{{ s.college }}</td>
+                        <td class="py-3 px-4 text-center">
+                            <a href="{% url 'edit' s.id %}" 
+                               class="bg-emerald-400 hover:bg-emerald-500 text-white px-3 py-1 rounded-lg mr-2 transition-all duration-300 shadow-sm">
+                               ✏ Edit
+                            </a>
+                            <a href="{% url 'delete' s.id %}" 
+                               class="bg-rose-400 hover:bg-rose-500 text-white px-3 py-1 rounded-lg transition-all duration-300 shadow-sm">
+                               🗑 Delete
+                            </a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="10" class="text-center py-5 text-gray-400">No students found.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>

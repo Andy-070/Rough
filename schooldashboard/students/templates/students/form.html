@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ view.object|default:"Add Student" }}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-blue-50 via-white to-blue-100 min-h-screen flex items-center justify-center text-gray-800">
+
+    <div class="bg-white p-8 rounded-2xl shadow-lg w-full max-w-lg border border-gray-200">
+        <h2 class="text-3xl font-bold text-center text-blue-700 mb-8">
+            {{ view.object|default:"Add Student" }}
+        </h2>
+
+        <form method="post" class="space-y-5">
+            {% csrf_token %}
+
+            <!-- Example input fields (replace with your form fields dynamically if needed) -->
+            <div>
+                <label class="block text-gray-700 font-medium mb-1">Name</label>
+                <input type="text" name="name" value="{{ form.name.value|default_if_none:'' }}"
+                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none bg-gray-50">
+            </div>
+
+            <div>
+                <label class="block text-gray-700 font-medium mb-1">Register No</label>
+                <input type="text" name="regno" value="{{ form.regno.value|default_if_none:'' }}"
+                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none bg-gray-50">
+            </div>
+
+            <div>
+                <label class="block text-gray-700 font-medium mb-1">Class</label>
+                <input type="text" name="student_class" value="{{ form.student_class.value|default_if_none:'' }}"
+                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none bg-gray-50">
+            </div>
+
+            <div>
+                <label class="block text-gray-700 font-medium mb-1">Branch</label>
+                <input type="text" name="branch" value="{{ form.branch.value|default_if_none:'' }}"
+                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none bg-gray-50">
+            </div>
+
+            <div>
+                <label class="block text-gray-700 font-medium mb-1">Year</label>
+                <input type="text" name="year" value="{{ form.year.value|default_if_none:'' }}"
+                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none bg-gray-50">
+            </div>
+
+            <div>
+                <label class="block text-gray-700 font-medium mb-1">Subject</label>
+                <input type="text" name="sub" value="{{ form.sub.value|default_if_none:'' }}"
+                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none bg-gray-50">
+            </div>
+
+            <div>
+                <label class="block text-gray-700 font-medium mb-1">Marks</label>
+                <input type="number" name="marks" value="{{ form.marks.value|default_if_none:'' }}"
+                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none bg-gray-50">
+            </div>
+
+            <div>
+                <label class="block text-gray-700 font-medium mb-1">Grade</label>
+                <input type="text" name="grade" value="{{ form.grade.value|default_if_none:'' }}"
+                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none bg-gray-50">
+            </div>
+
+            <div>
+                <label class="block text-gray-700 font-medium mb-1">College</label>
+                <input type="text" name="college" value="{{ form.college.value|default_if_none:'' }}"
+                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none bg-gray-50">
+            </div>
+
+            <!-- Buttons -->
+            <div class="flex justify-between items-center mt-6">
+                <a href="{% url 'display' %}" 
+                   class="bg-gray-100 hover:bg-gray-200 text-blue-700 font-medium px-5 py-2 rounded-xl border border-gray-300 transition-all duration-300">
+                   ⬅ Back
+                </a>
+
+                <button 
+                    type="submit"
+                    class="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-2 rounded-xl shadow-md transition-all duration-300">
+                    💾 Save
+                </button>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>
